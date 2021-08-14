@@ -1,6 +1,17 @@
 .sidebar {
-  border: 1px solid black;
   height: 100vh;
   flex: 0.2;
-  background-color: #545454;
+  color: white;
+  background-color: #10161f;
+  min-width: 200px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sidebar__logo {
+  object-fit: contain;
+  height: 70px;
+  width: 100px;
+  padding: 10px;
+  margin-right: auto;
 }
