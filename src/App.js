@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import Login from "./components/Login";
 import { getTokenFromUrl } from "./utils/spotify";
