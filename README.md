@@ -11,3 +11,9 @@ This is a Spotify clone.
 ```sh
  yarn add spotify-web-api-js
 ```
+
+2. Setup material-ui
+
+```sh
+ 	npm install @material-ui/core
+```
