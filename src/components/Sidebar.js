@@ -6,8 +6,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import AddIcon from "@material-ui/icons/Add";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import { useStateProviderValue } from "../redux/StateProvider";
 
 function Sidebar() {
+  const [{ playlists }, dispatch] = useStateProviderValue();
+
   return (
     <div className="sidebar">
       <img
@@ -25,9 +28,9 @@ function Sidebar() {
 
       <hr />
 
-      <SidebarOption title="Rock" />
-      <SidebarOption title="Funk" />
-      <SidebarOption title="Pop" />
+      {playlists?.items?.map((playlist) => (
+        <SidebarOption title={playlist.name} />
+      ))}
     </div>
   );
 }
