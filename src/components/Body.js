@@ -6,6 +6,7 @@ import PlayCircleFilledRoundedIcon from "@material-ui/icons/PlayCircleFilledRoun
 import FavoriteBorderRoundedIcon from "@material-ui/icons/FavoriteBorderRounded";
 import MoreHorizRoundedIcon from "@material-ui/icons/MoreHorizRounded";
 import SongRow from "./SongRow";
+import { numberWithCommas } from "../utils/utils";
 
 function Body({ spotify }) {
   const [{ discover_weekly }, dispatch] = useStateProviderValue();
@@ -18,10 +19,12 @@ function Body({ spotify }) {
         <div className="body__infoText">
           <strong>{discover_weekly?.type}</strong>
           <h2>{discover_weekly?.name}</h2>
-          <p>{discover_weekly?.description}</p>
+          <p>{discover_weekly?.description.replace(/<[^>]+>/g, "")}</p>
           <p className="body__infoDetails">
-            {discover_weekly?.owner.display_name},{" "}
-            {discover_weekly?.followers?.total} Likes,{" "}
+            <span className="body__ownerInfo">
+              {discover_weekly?.owner.display_name}{" "}
+            </span>
+            {numberWithCommas(discover_weekly?.followers?.total)} Likes,{" "}
             {discover_weekly?.tracks?.total} songs
           </p>
         </div>
@@ -34,8 +37,8 @@ function Body({ spotify }) {
           <MoreHorizRoundedIcon className="body__option" />
         </div>
 
-        {discover_weekly?.tracks.items.map((item) => (
-          <SongRow track={item.track} />
+        {discover_weekly?.tracks.items.map((item, index) => (
+          <SongRow track={item.track} key={item.id} serial={index} />
         ))}
       </div>
     </div>

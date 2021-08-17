@@ -7,6 +7,7 @@ import Player from "./components/Player";
 import { useStateProviderValue } from "./redux/StateProvider";
 
 const spotify = new SpotifyWebApi();
+console.log(spotify);
 
 function App() {
   const [{ user, token }, dispatch] = useStateProviderValue();
@@ -17,12 +18,12 @@ function App() {
     const _token = hash.access_token;
 
     if (_token) {
+      spotify.setAccessToken(_token);
+
       dispatch({
         type: "SET_TOKEN",
         token: _token,
       });
-
-      spotify.setAccessToken(_token);
 
       spotify.getMe().then((user) => {
         dispatch({
@@ -32,21 +33,22 @@ function App() {
       });
 
       spotify.getUserPlaylists().then((playlists) => {
+        console.log("user playlists", playlists);
         dispatch({
           type: "SET_PLAYLISTS",
           playlists,
         });
       });
 
-      spotify.getPlaylist("37i9dQZF1EIW4CMwrNEKYU").then((response) => {
-        console.log(response);
+      spotify.getPlaylist("5RP8XY50zU09vBYRGb0jUy").then((response) => {
+        console.log("specific playlist", response);
         dispatch({
           type: "SET_DISCOVER_WEEKLY",
           discover_weekly: response,
         });
       });
     }
-  }, []);
+  }, [token, dispatch]);
 
   return (
     <div className="App">

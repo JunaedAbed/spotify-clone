@@ -1,5 +1,5 @@
 .songRow {
-  margin-left: 20px;
+  margin-left: 0px;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -9,8 +9,14 @@
 
 .songRow:hover {
   cursor: pointer;
-  background-color: black;
+  background-color: #161616;
   opacity: 0.8;
+  border-radius: 7px;
+}
+
+.songRow__serial {
+  color: #a3a3a3;
+  margin-right: 30px;
 }
 
 .songRow__info {
@@ -24,7 +30,7 @@
 .songRow__info > p {
   font-size: 14px;
   margin-top: 3px;
-  color: gray;
+  color: #a3a3a3;
 }
 
 .songRow__album {

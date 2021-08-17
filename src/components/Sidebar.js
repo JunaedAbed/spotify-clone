@@ -13,11 +13,11 @@ function Sidebar() {
 
   return (
     <div className="sidebar">
-      <img
+      {/* <img
         className="sidebar__logo"
         src="https://logos-download.com/wp-content/uploads/2016/08/Spotify_logo-700x210.png"
         alt="logo"
-      />
+      /> */}
 
       <SidebarOption title="Home" Icon={HomeIcon} />
       <SidebarOption title="Search" Icon={SearchIcon} />
