@@ -3,20 +3,24 @@
   height: 100vh;
   color: white;
   background: linear-gradient(#2471a3, rgba(0, 0, 0, 1));
-  padding: 30px;
+  padding: 10px;
+  overflow-y: overlay;
+}
+
+.body::-webkit-scrollbar {
+  display: none;
 }
 
 .body__info {
   display: flex;
   align-items: flex-end;
   padding: 10px;
-  /* box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5); */
 }
 
 .body__info > img {
   height: 20vw;
-  margin: 0 20px;
-  border-radius: 20px;
+  margin: 10px 20px 10px 0;
+  border-radius: 10px;
   /* box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5); */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
 }
@@ -26,6 +30,7 @@
 }
 
 .body__infoText > strong {
+  text-transform: uppercase;
   font-size: 14px;
 }
 
@@ -39,4 +44,47 @@
   font-size: 14px;
   color: #a3a3a3;
   word-wrap: break-word;
+}
+
+.body__infoDetails {
+  margin-top: 5px;
+}
+
+.body__songs {
+  padding: 10px;
+}
+
+.body__icons {
+  display: flex;
+  align-items: center;
+}
+
+.body__icons > .MuiSvgIcon-root {
+  margin-right: 25px;
+}
+
+.body__shuffle {
+  font-size: 70px !important;
+  margin: 20px 0px 20px -5px;
+}
+
+.body__shuffle:hover {
+  transition: transform 0.1s;
+  transform: scale(1.08) !important;
+}
+
+.body__like {
+  color: #a3a3a3;
+}
+
+.body__like:hover {
+  color: white;
+}
+
+.body__option {
+  color: #a3a3a3;
+}
+
+.body__option:hover {
+  color: white;
 }

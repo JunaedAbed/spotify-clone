@@ -38,12 +38,13 @@ function App() {
         });
       });
 
-      spotify.getPlaylist("37i9dQZEVXcCjK2i1ySQcX").then((response) =>
+      spotify.getPlaylist("37i9dQZF1EIW4CMwrNEKYU").then((response) => {
+        console.log(response);
         dispatch({
           type: "SET_DISCOVER_WEEKLY",
           discover_weekly: response,
-        })
-      );
+        });
+      });
     }
   }, []);
 
