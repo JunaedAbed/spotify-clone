@@ -47,12 +47,29 @@ function App() {
           discover_weekly: response,
         });
       });
+
+      // spotify.getMySavedAlbums().then((album) => {
+      //   console.log("album", album);
+      // });
+
+      // spotify.getMySavedTracks(_token).then((track) => {
+      //   console.log("My saved track", track);
+      // });
+
+      spotify.getMyTopArtists(_token).then((artist) => {
+        console.log("My top artists", artist);
+        dispatch({
+          type: "SET_MY_TOP_ARTISTS",
+          my_top_artists: artist,
+        });
+      });
     }
   }, [token, dispatch]);
 
   return (
     <div className="App">
-      {token ? <Player spotify={spotify} /> : <Login />}
+      {!token && <Login />}
+      {token && <Player spotify={spotify} />}
     </div>
   );
 }

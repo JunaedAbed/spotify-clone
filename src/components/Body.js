@@ -6,10 +6,48 @@ import PlayCircleFilledRoundedIcon from "@material-ui/icons/PlayCircleFilledRoun
 import FavoriteBorderRoundedIcon from "@material-ui/icons/FavoriteBorderRounded";
 import MoreHorizRoundedIcon from "@material-ui/icons/MoreHorizRounded";
 import SongRow from "./SongRow";
-import { numberWithCommas } from "../utils/utils";
 
 function Body({ spotify }) {
   const [{ discover_weekly }, dispatch] = useStateProviderValue();
+
+  const playPlaylist = (id) => {
+    spotify
+      .play({
+        context_uri: `spotify:playlist:5RP8XY50zU09vBYRGb0jUy`,
+      })
+      .then((res) => {
+        spotify.getMyCurrentPlayingTrack().then((r) => {
+          dispatch({
+            type: "SET_ITEM",
+            item: r.item,
+          });
+          dispatch({
+            type: "SET_PLAYING",
+            playing: true,
+          });
+        });
+      });
+  };
+
+  const playSong = (id) => {
+    spotify
+      .play({
+        uris: [`spotify:track:${id}`],
+      })
+      .then((res) => {
+        spotify.getMyCurrentPlayingTrack().then((r) => {
+          dispatch({
+            type: "SET_ITEM",
+            item: r.item,
+          });
+          dispatch({
+            type: "SET_PLAYING",
+            playing: true,
+          });
+        });
+      });
+  };
+
   return (
     <div className="body">
       <Header spotify={spotify} />
@@ -24,21 +62,31 @@ function Body({ spotify }) {
             <span className="body__ownerInfo">
               {discover_weekly?.owner.display_name}{" "}
             </span>
-            {numberWithCommas(discover_weekly?.followers?.total)} Likes,{" "}
-            {discover_weekly?.tracks?.total} songs
+            {discover_weekly?.followers?.total
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+            Likes, {discover_weekly?.tracks?.total} songs
           </p>
         </div>
       </div>
 
       <div className="body__songs">
         <div className="body__icons">
-          <PlayCircleFilledRoundedIcon className="body__shuffle" />
+          <PlayCircleFilledRoundedIcon
+            className="body__shuffle"
+            onClick={playPlaylist}
+          />
           <FavoriteBorderRoundedIcon className="body__like" fontSize="large" />
           <MoreHorizRoundedIcon className="body__option" />
         </div>
 
         {discover_weekly?.tracks.items.map((item, index) => (
-          <SongRow track={item.track} key={item.id} serial={index} />
+          <SongRow
+            playSong={playSong}
+            track={item.track}
+            key={item.id}
+            serial={index}
+          />
         ))}
       </div>
     </div>
